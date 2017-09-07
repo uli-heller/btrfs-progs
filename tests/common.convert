@@ -275,3 +275,12 @@ convert_test() {
 
 	convert_test_post_rollback "$fstype"
 }
+
+check_kernel_support_reiserfs()
+{
+	if ! grep -iq 'reiserfs' /proc/filesystems; then
+		echo "WARNING: reiserfs filesystem not listed in /proc/filesystems, some tests might be skipped"
+		return 1
+	fi
+	return 0
+}
